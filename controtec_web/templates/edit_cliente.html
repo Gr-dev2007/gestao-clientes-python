@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editar Cliente</h2>
+<form method="post" action="{{ url_for('editar_cliente', cliente_id=cliente[0]) }}">
+  <label>Nome:<br><input type="text" name="nome" value="{{ cliente[1] }}" required></label><br>
+  <label>Telefone (ex: +5511999999999):<br><input type="text" name="telefone" value="{{ cliente[2] }}" required></label><br>
+  <label>Produto:<br><input type="text" name="produto" value="{{ cliente[3] }}"></label><br>
+  <label>Vencimento (AAAA-MM-DD):<br><input type="date" name="vencimento" value="{{ cliente[4] }}"></label><br>
+  <label>Tipo:<br>
+    <select name="tipo">
+      <option value="vencimento" {% if cliente[5]=='vencimento' %}selected{% endif %}>Lembrete Vencimento</option>
+      <option value="oferta" {% if cliente[5]=='oferta' %}selected{% endif %}>Oferta Promocional</option>
+      <option value="natal" {% if cliente[5]=='natal' %}selected{% endif %}>Mensagem Natalina</option>
+    </select>
+  </label><br><br>
+  <button type="submit">Salvar alterações</button>
+  <a href="{{ url_for('index') }}">Cancelar</a>
+</form>
+{% endblock %}

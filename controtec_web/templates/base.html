@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Controtec CRM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <script>
+    function confirmDelete(formId, nome) {
+      if (confirm('Excluir cliente \"' + nome + '\"? Esta ação é irreversível.')) {
+        document.getElementById(formId).submit();
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Controtec CRM</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Início</a> |
+      <a href="{{ url_for('add_cliente') }}">Adicionar Cliente</a> |
+      <a href="{{ url_for('enviar') }}">Enviar Mensagens</a>
+    </nav>
+  </header>
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li style="color: {% if category == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer><small>Controtec © 2025</small></footer>
+</body>
+</html>
